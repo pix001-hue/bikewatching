@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bikewatching · Boston in motion</title>
+<meta name="description" content="Explore Bluebikes traffic across Boston and Cambridge in March 2024.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css">
+<link rel="stylesheet" href="global.css"><link rel="stylesheet" href="map.css">
+<script type="module">
+import('./map.js').catch(error => {
+  console.error(error);
+  document.querySelector('#status').textContent = 'Map could not start. Check your internet connection and WebGL support, then reload.';
+});
+</script>
+</head>
+<body>
+<header><div><p class="eyebrow">FIELD NOTES / URBAN MOBILITY</p><h1>🚲 Bikewatching<span class="period">.</span></h1><p class="intro">Two cities. Thousands of rides. A daily rhythm.</p></div><div class="edition">BOSTON + CAMBRIDGE<br><strong>MARCH 2024</strong></div></header>
+<main>
+<section class="toolbar" aria-label="Time filter">
+<div><p class="eyebrow">EXPLORE THE DAY</p><h2 id="time-heading">Every hour, together</h2><p id="window-label">All rides throughout March 2024</p></div>
+<div class="time-control"><div class="filter-label"><label for="time-slider">Filter by time</label><output for="time-slider"><time id="selected-time" hidden></time><em id="any-time">Any time</em></output></div><input id="time-slider" type="range" min="-1" max="1440" step="1" value="-1" disabled aria-describedby="time-note"><div class="ticks"><span>All day</span><span>6 AM</span><span>Noon</span><span>6 PM</span><span>Midnight</span></div><div class="presets"><button data-minute="-1" aria-pressed="true" disabled>All day</button><button data-minute="480" aria-pressed="false" disabled>8 AM</button><button data-minute="720" aria-pressed="false" disabled>Noon</button><button data-minute="1020" aria-pressed="false" disabled>5 PM</button></div></div>
+</section>
+<div class="map-wrap"><div id="map" role="region" aria-label="Interactive bike traffic map of Boston and Cambridge"><svg class="stations" aria-label="Bluebikes stations"></svg></div><div class="map-caption"><span class="live-dot"></span> BOSTON / CAMBRIDGE <button id="reset-map" title="Reset map to Boston and Cambridge">Reset view ↗</button></div><div id="tooltip" role="tooltip" hidden></div></div>
+<div class="map-footer"><div class="legend" aria-label="Station traffic color legend"><span class="legend-label">STATION FLOW</span><span><i style="--swatch:#267ba0"></i>More departures</span><span><i style="--swatch:#9977a9"></i>Balanced</span><span><i style="--swatch:#d88135"></i>More arrivals</span></div><span class="lane-key"><i></i>Bike network</span></div>
+<section class="reading"><div><h2>Follow the flow.</h2><p>Each circle is a Bluebikes station. Larger circles mean more arrivals + departures. Hover or focus a station to see its numbers.</p></div><div><p id="time-note">Choose a time to explore a two-hour window, from one hour before to one hour after. Times are local to Boston, across all days in March. Filtered circles are enlarged for visibility.</p><p id="status" role="status" aria-live="polite">Loading map and ride data…</p></div></section>
+</main>
+<footer><span>DSC 106 / LAB 07 · Pingzhang Xu</span><span>Data: <a href="https://dsc106.com/labs/lab07/">Bluebikes & city bike networks</a> · <a href="https://pix001-hue.github.io/DSC106/">Portfolio ↗</a></span></footer>
+</body></html>
